@@ -7,17 +7,21 @@ import Paper from "@material-ui/core/Paper";
 import '../../layout/layout.css';
 
 
-const PortfolioData = () => {
+const PortfolioData = (props) => {
     const gridRef = useRef(); // Optional - for accessing Grid's API
     const [rowData, setRowData] = useState(); // Set rowData to Array of Objects, one Object per Row
-   
+    
     // Each Column Definition results in one Column.
     const [columnDefs, setColumnDefs] = useState([
       {field: 'Symbol', filter: true},
       {field: 'Name', filter: true},
       {field: 'Sector', filter: true},
       {field: 'CurrentPrice', filter: true},  
-      {field: 'ClosedPrice', filter: true}  
+      {field: 'ClosedPrice', filter: true},
+      {field: 'Country', filter: true},
+      {field: 'MarketCap', filter: true},      
+      {field: 'Weightage', filter: true},      
+      {field: 'ptotalEsg', filter: true},      
     ]);
 
     // DefaultColDef sets props common to all Columns
@@ -25,17 +29,20 @@ const PortfolioData = () => {
         sortable: true
       }));
    
-  
+      
     // load data from sever
     useEffect(() => {
       fetch('http://localhost:5000/get_portfolio')
       .then(result => result.json())      
-      .then(rowData => setRowData(rowData))
-    }, []);
+      .then(rowData => setRowData(rowData) )
+      //.then ( alert ("Fetch"))
+    }, [props.ticker]);
    
    
     return (
-      <Paper >
+      
+      <Paper >        
+        
         <div className="ag-theme-alpine">   
           {/* On div wrapping Grid a) specify theme CSS Class Class and b) sets Grid size */}
           <div className="ag-theme-alpine" style={{height: '76vh'}}>        
@@ -52,6 +59,7 @@ const PortfolioData = () => {
                 />
           </div>
         </div>
+        
       </Paper>
     );
    };

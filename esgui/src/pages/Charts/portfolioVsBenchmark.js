@@ -6,7 +6,19 @@ import '../../layout/layout.css';
 class PortfolioVsBenchmark extends Component {
   constructor(props) {
     super(props);
-    this.state = {grDataBM: [], grDataPF: [], grLabels: []};
+    this.state = {grDataBM: [], grDataPF: [], grLabels: [], shouldRefresh: "-1"};
+  }
+
+  shouldComponentUpdate(nextProps) {
+    // Rendering the component only if
+    // passed props value is changed
+    if (this.props.showImpact === null) return true;
+    if (this.state.shouldRefresh !== this.props.showImpact) {
+      this.state.shouldRefresh = this.props.showImpact;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   componentDidMount() {

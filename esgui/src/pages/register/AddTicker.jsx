@@ -16,21 +16,30 @@ class AddTicker extends Component {
         this.state = {ticker: "", tickerName: "", tickers:[]};
       }
     
-      componentDidMount() {
-           
-      }
-      
+    componentDidMount() {
+    }
+
+    componentDidUpdate() {
+        
+    }
+
+    refresh = () => {
+        // re-renders the component
+        this.setState({tickerName: this.state.ticker});
+        this.forceUpdate();        
+    };
+
     handleSubmit = (event) => {
         event.preventDefault();
         fetch('http://localhost:5000/add_ticker?' + new URLSearchParams({
             pticker: this.state.ticker,
         }))
-        .then(result => alert("Added Successfully"))       
-   }
+        .then(result => { alert("Added Successfully"); this.refresh();})       
+    }
     
     handleChange = (value) => {
-        this.state.ticker = value.code;
-      }
+        this.setState({ticker: value.code});
+    }
 
       render() {   
         const { classes } = this.props;
@@ -52,7 +61,7 @@ class AddTicker extends Component {
                             onChange= {(event, value) => this.handleChange(value)}
                             style={{ width: 500 }}
                             options={tickers}
-                            
+                            defaultValue= {this.state.ticker}
                             autoHighlight
                             getOptionLabel={(option) => option.label}
                             renderOption={(option) => (
@@ -79,7 +88,7 @@ class AddTicker extends Component {
                     </Grid>
                     <Grid item md={4}></Grid>
                     <Grid item md={12}>
-                        <PortfolioData></PortfolioData>
+                        <PortfolioData ticker = {this.state.tickerName}></PortfolioData>
                     </Grid>
                 </Grid>
             </form>

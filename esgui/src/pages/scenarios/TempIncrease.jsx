@@ -22,7 +22,7 @@ class TempLevelChange extends Component {
       
     handleSubmit = (event) => {
         event.preventDefault();
-        fetch('http://localhost:5000/calculate_temp_change_impact?' + new URLTemprchParams({
+        fetch('http://localhost:5000/calculate_temp_change_impact?' + new URLSearchParams({
             tempLevel: this.state.TempLevel,
         }))
         .then(result => alert("Added Successfully"))       
@@ -49,8 +49,8 @@ class TempLevelChange extends Component {
                             //value={value}
                             onChange= {(event, value) => this.handleChange(value)}
                             style={{ width: 500 }}
-                            options={tickers}
-                            
+                            options={TempLevels}
+                            defaultValue={TempLevels[0]}
                             autoHighlight
                             getOptionLabel={(option) => option.label}
                             renderOption={(option) => (

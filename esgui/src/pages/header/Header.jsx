@@ -41,7 +41,7 @@ export default function Header({ issidebar, changeSidebar, islogin }) {
           }
 
           <Typography variant="h6" className={classes.title}>
-            <Link to={islogin ? "/home" : "/"} style={{ textDecoration: "none", color: "white" }} >ESG Analysis</Link>
+            <Link to={islogin ? "/home" : "/"} style={{ textDecoration: "none", color: "white" }} >Graphhite</Link>
           </Typography>
           {
             islogin ? <div><a href="" target="_blank" rel="noopener noreferrer"><img src={user_dummy_img} height="40" width="40" className="rounded-circle" alt="profile" /></a></div> : null

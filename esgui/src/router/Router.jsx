@@ -6,7 +6,7 @@ import Login from "../pages/login/Login"
 import Logout from "../pages/logout/Logout"
 import PNF from "../pages/404"
 import AddTicker from '../pages/register/AddTicker'
-import SeaLevelChange from '../pages/scenarios/SeaLevelChange'
+import ScenarioTabs from '../components/tabs'
 
 export default class Router extends Component {
     render() {
